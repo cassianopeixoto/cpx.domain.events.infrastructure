@@ -16,5 +16,7 @@ public sealed class AggregateTypeConfiguration : IEntityTypeConfiguration<Aggreg
         builder.Property(o => o.MetadataUuid).HasColumnName("metadata_uuid").IsRequired();
         builder.HasOne(o => o.Metadata).WithMany(o => o.Aggregates).HasForeignKey(o => o.MetadataUuid);
         builder.HasMany(o => o.Events).WithOne(o => o.Aggregate).HasForeignKey(o => o.AggregateUuid);
+
+        builder.HasIndex(o => new { o.Uuid, o.MetadataUuid }).IsUnique();
     }
 }

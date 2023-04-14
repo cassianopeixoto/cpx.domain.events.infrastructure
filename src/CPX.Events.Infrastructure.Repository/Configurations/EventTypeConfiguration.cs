@@ -19,5 +19,7 @@ public sealed class EventTypeConfiguration : IEntityTypeConfiguration<Event>
         builder.HasOne(o => o.Aggregate).WithMany(o => o.Events).HasForeignKey(o => o.AggregateUuid);
         builder.Property(o => o.Data).HasColumnName("data").IsRequired();
         builder.Property(o => o.Version).HasColumnName("version").IsRequired();
+
+        builder.HasIndex(o => new { o.MetadataUuid, o.AggregateUuid, o.Version }).IsUnique();
     }
 }

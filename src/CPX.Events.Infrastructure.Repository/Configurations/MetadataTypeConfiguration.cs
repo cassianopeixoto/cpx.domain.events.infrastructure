@@ -17,5 +17,7 @@ public sealed class MetadataTypeConfiguration : IEntityTypeConfiguration<Metadat
         builder.Property(o => o.NamespaceName).HasColumnName("namespace_name").IsRequired();
         builder.HasMany(o => o.Aggregates).WithOne(o => o.Metadata).HasForeignKey(o => o.MetadataUuid);
         builder.HasMany(o => o.Events).WithOne(o => o.Metadata).HasForeignKey(o => o.MetadataUuid);
+
+        builder.HasIndex(o => new { o.ClassName, o.NamespaceName }).IsUnique();
     }
 }
