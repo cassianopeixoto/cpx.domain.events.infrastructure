@@ -1,7 +1,7 @@
-using CPX.Events.Infrastructure.Repository.Configurations;
+using CPX.Events.Infrastructure.Repositories.Configurations;
 using Microsoft.EntityFrameworkCore;
 
-namespace CPX.Events.Infrastructure.Repository;
+namespace CPX.Events.Infrastructure.Repositories;
 
 public sealed class EventStoreContext : DbContext
 {

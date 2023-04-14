@@ -1,8 +1,8 @@
-using CPX.Events.Infrastructure.Repository.Entities;
+using CPX.Events.Infrastructure.Repositories.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CPX.Events.Infrastructure.Repository.Configurations;
+namespace CPX.Events.Infrastructure.Repositories.Configurations;
 
 public sealed class EventTypeConfiguration : IEntityTypeConfiguration<Event>
 {

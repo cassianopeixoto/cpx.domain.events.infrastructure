@@ -1,4 +1,4 @@
-namespace CPX.Events.Infrastructure.Repository.Entities;
+namespace CPX.Events.Infrastructure.Repositories.Entities;
 
 public sealed class Event : Entity
 {

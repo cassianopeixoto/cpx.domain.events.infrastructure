@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\CPX.Events.Infrastructure.Repository.Entities\CPX.Events.Infrastructure.Repository.Entities.csproj" />
+    <ProjectReference Include="..\CPX.Events.Infrastructure.Repositories.Entities\CPX.Events.Infrastructure.Repositories.Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>
