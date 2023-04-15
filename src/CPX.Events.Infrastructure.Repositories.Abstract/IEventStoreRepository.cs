@@ -5,7 +5,7 @@ namespace CPX.Events.Infrastructure.Repositories.Abstract;
 
 public interface IEventStoreRepository<TAggregate, TIdentity> where TAggregate : AggregateRoot<TIdentity> where TIdentity : Identifier
 {
-    void SaveAsync(TAggregate aggregate, CancellationToken cancellationToken);
+    Task SaveAsync(TAggregate aggregate, CancellationToken cancellationToken);
 
     TAggregate GetAsync(TIdentity identifier, CancellationToken cancellationToken);
 }

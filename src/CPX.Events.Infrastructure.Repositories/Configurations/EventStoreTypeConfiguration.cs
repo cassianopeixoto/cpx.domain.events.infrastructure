@@ -4,18 +4,17 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CPX.Events.Infrastructure.Repositories.Configurations;
 
-public sealed class AggregateTypeConfiguration : IEntityTypeConfiguration<Aggregate>
+public sealed class EventStoreTypeConfiguration : IEntityTypeConfiguration<EventStore>
 {
-    public void Configure(EntityTypeBuilder<Aggregate> builder)
+    public void Configure(EntityTypeBuilder<EventStore> builder)
     {
-        builder.ToTable("aggregates");
+        builder.ToTable("events_stores");
         builder.HasKey(o => o.Uuid);
         builder.Property(o => o.Uuid).HasColumnName("uuid");
         builder.Property(o => o.CreatedAt).HasColumnName("created_at").IsRequired();
-        builder.Property(o => o.UpdatedAt).HasColumnName("updated_at").IsRequired();
         builder.Property(o => o.MetadataUuid).HasColumnName("metadata_uuid").IsRequired();
-        builder.HasOne(o => o.Metadata).WithMany(o => o.Aggregates).HasForeignKey(o => o.MetadataUuid);
-        builder.HasMany(o => o.Events).WithOne(o => o.Aggregate).HasForeignKey(o => o.AggregateUuid);
+        builder.HasOne(o => o.Metadata).WithMany(o => o.EventStores).HasForeignKey(o => o.MetadataUuid);
+        builder.HasMany(o => o.Events).WithOne(o => o.EventStore).HasForeignKey(o => o.EventStoreUuid);
 
         builder.HasIndex(o => new { o.Uuid, o.MetadataUuid }).IsUnique();
     }

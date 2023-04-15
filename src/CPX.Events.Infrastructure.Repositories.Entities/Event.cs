@@ -6,9 +6,9 @@ public sealed class Event : Entity
 
     public Metadata? Metadata { get; set; }
 
-    public Guid AggregateUuid { get; set; }
+    public Guid EventStoreUuid { get; set; }
 
-    public Aggregate? Aggregate { get; set; }
+    public EventStore? EventStore { get; set; }
 
     public string? Data { get; set; }
 

@@ -6,7 +6,7 @@ public sealed class Metadata : Entity
 
     public string? NamespaceName { get; set; }
 
-    public ICollection<Aggregate>? Aggregates { get; set; }
+    public ICollection<EventStore>? EventStores { get; set; }
 
     public ICollection<Event>? Events { get; set; }
 }

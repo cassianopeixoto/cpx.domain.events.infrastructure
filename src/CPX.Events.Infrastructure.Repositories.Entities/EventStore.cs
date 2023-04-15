@@ -1,6 +1,6 @@
 namespace CPX.Events.Infrastructure.Repositories.Entities;
 
-public sealed class Aggregate : Entity
+public sealed class EventStore : Entity
 {
     public Guid MetadataUuid { get; set; }
 
