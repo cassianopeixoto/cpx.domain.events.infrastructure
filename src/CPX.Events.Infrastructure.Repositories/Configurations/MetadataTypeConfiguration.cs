@@ -12,11 +12,12 @@ public sealed class MetadataTypeConfiguration : IEntityTypeConfiguration<Metadat
         builder.HasKey(o => o.Uuid);
         builder.Property(o => o.Uuid).HasColumnName("uuid");
         builder.Property(o => o.CreatedAt).HasColumnName("created_at").IsRequired();
-        builder.Property(o => o.ClassName).HasColumnName("class_name").IsRequired();
+        builder.Property(o => o.AssemblyName).HasColumnName("assembly_name").IsRequired();
         builder.Property(o => o.NamespaceName).HasColumnName("namespace_name").IsRequired();
-        builder.HasMany(o => o.EventStores).WithOne(o => o.Metadata).HasForeignKey(o => o.MetadataUuid);
+        builder.Property(o => o.ClassName).HasColumnName("class_name").IsRequired();
+        builder.HasMany(o => o.EventsStores).WithOne(o => o.Metadata).HasForeignKey(o => o.MetadataUuid);
         builder.HasMany(o => o.Events).WithOne(o => o.Metadata).HasForeignKey(o => o.MetadataUuid);
 
-        builder.HasIndex(o => new { o.ClassName, o.NamespaceName }).IsUnique();
+        builder.HasIndex(o => new { o.AssemblyName, o.NamespaceName, o.ClassName,  }).IsUnique();
     }
 }

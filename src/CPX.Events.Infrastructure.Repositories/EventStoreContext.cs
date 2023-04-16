@@ -8,6 +8,7 @@ public sealed class EventStoreContext : DbContext, IEventStoreContext
 {
     public EventStoreContext(DbContextOptions options) : base(options)
     {
+        this.ChangeTracker.LazyLoadingEnabled = false;
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
