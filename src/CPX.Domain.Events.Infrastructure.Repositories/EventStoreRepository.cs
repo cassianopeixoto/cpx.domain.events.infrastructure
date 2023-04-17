@@ -1,13 +1,12 @@
-using System.Globalization;
 using System.Reflection;
 using CPX.Domain.Abstract.Aggregates;
 using CPX.Domain.Abstract.Events;
 using CPX.Domain.Abstract.Identifiers;
 using CPX.Domain.Events.Infrastructure.Repositories.Abstract;
 using CPX.Domain.Events.Infrastructure.Repositories.Entities;
+using CPX.Events.Abstract;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using EventSourceEvent = CPX.Domain.Events.Infrastructure.Repositories.Entities.Event;
 
 namespace CPX.Domain.Events.Infrastructure.Repositories;
 
@@ -61,7 +60,7 @@ public sealed class EventStoreRepository<TAggregate, TIdentity> : IEventStoreRep
 
             if (eventType is not null)
             {
-                var domainEvent = JsonConvert.DeserializeObject(@event.Data, eventType);
+                var domainEvent = JsonEventConvert.Deserialize(@event.Data, eventType);
 
                 if (domainEvent is not null)
                 {
@@ -132,7 +131,7 @@ public sealed class EventStoreRepository<TAggregate, TIdentity> : IEventStoreRep
                     NamespaceName = es.Metadata.NamespaceName,
                     ClassName = es.Metadata.ClassName,
                 },
-                Events = es.Events.Select(e => new Event
+                Events = es.Events.Select(e => new EventSourceEvent
                 {
                     Uuid = e.Uuid,
                     CreatedAt = e.CreatedAt,
@@ -155,26 +154,26 @@ public sealed class EventStoreRepository<TAggregate, TIdentity> : IEventStoreRep
 
     private async Task CreateEventsAsync(Guid eventStoreUuid, IReadOnlyCollection<DomainEvent> domainEvents, CancellationToken cancellationToken)
     {
-        var events = new List<Event>();
+        var events = new List<EventSourceEvent>();
 
         foreach (var domainEvent in domainEvents)
         {
             var metadataUuid = await GetMetadataAsync(domainEvent, cancellationToken);
 
-            var @event = new Event
+            var @event = new EventSourceEvent
             {
                 Uuid = Guid.NewGuid(),
                 CreatedAt = DateTimeOffset.UtcNow,
                 MetadataUuid = metadataUuid,
                 EventStoreUuid = eventStoreUuid,
-                Data = SerializeObject(domainEvent),
+                Data = JsonEventConvert.Serialize(domainEvent),
                 Version = domainEvent.Version,
             };
 
             events.Add(@event);
         }
 
-        var setEvent = eventStoreContext.Set<Event>();
+        var setEvent = eventStoreContext.Set<EventSourceEvent>();
         await setEvent.AddRangeAsync(events, cancellationToken);
     }
 
@@ -214,16 +213,5 @@ public sealed class EventStoreRepository<TAggregate, TIdentity> : IEventStoreRep
         }
 
         return metadata.Uuid;
-    }
-
-    private static string SerializeObject(DomainEvent @event)
-    {
-        return JsonConvert.SerializeObject(@event, new JsonSerializerSettings()
-        {
-            ContractResolver = new CamelCasePropertyNamesContractResolver(),
-            DateFormatHandling = DateFormatHandling.IsoDateFormat,
-            DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-            Culture = CultureInfo.InvariantCulture
-        });
     }
 }
