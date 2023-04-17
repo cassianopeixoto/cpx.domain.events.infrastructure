@@ -8,5 +8,7 @@ public interface IEventStoreRepository<TAggregate, TIdentity> where TAggregate :
 {
     Task SaveAsync(Guid eventStoreUuid, IReadOnlyCollection<DomainEvent> domainEvents, CancellationToken cancellationToken);
 
+    Task<TAggregate?> GetAsync(TIdentity identifier, CancellationToken cancellationToken);
+
     Task<TAggregate?> GetAsync(TIdentity identifier, string methodName, CancellationToken cancellationToken);
 }

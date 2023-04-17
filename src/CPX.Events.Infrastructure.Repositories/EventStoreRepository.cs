@@ -15,8 +15,10 @@ public sealed class EventStoreRepository<TAggregate, TIdentity> : IEventStoreRep
 {
     private readonly IEventStoreContext eventStoreContext;
 
-    public EventStoreRepository(IEventStoreContext eventStoreContext)
+    public EventStoreRepository(IEventStoreContext? eventStoreContext)
     {
+        if (eventStoreContext is null) throw new ArgumentNullException(nameof(eventStoreContext));
+
         this.eventStoreContext = eventStoreContext;
     }
 
@@ -25,6 +27,11 @@ public sealed class EventStoreRepository<TAggregate, TIdentity> : IEventStoreRep
         await CreateEventStoreAsync(eventStoreUuid, cancellationToken);
         await CreateEventsAsync(eventStoreUuid, domainEvents, cancellationToken);
         await eventStoreContext.SaveChangesAsync(cancellationToken);
+    }
+
+    public async Task<TAggregate?> GetAsync(TIdentity identifier, CancellationToken cancellationToken)
+    {
+        return await GetAsync(identifier, "Apply", cancellationToken);
     }
 
     public async Task<TAggregate?> GetAsync(TIdentity identifier, string methodName, CancellationToken cancellationToken)
@@ -185,8 +192,8 @@ public sealed class EventStoreRepository<TAggregate, TIdentity> : IEventStoreRep
 
     private async Task<Guid> GetMetadataAsync(Type type, CancellationToken cancellationToken)
     {
-        var assemblyName = type.Assembly.FullName;
-        var namespaceName = type.Namespace;
+        var assemblyName = type.Assembly.FullName ?? string.Empty;
+        var namespaceName = type.Namespace ?? string.Empty;
         var className = type.Name;
 
         var setMetadata = eventStoreContext.Set<Metadata>();

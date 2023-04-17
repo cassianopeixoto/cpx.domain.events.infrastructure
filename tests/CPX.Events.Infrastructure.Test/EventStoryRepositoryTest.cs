@@ -3,7 +3,7 @@ using CPX.Events.Infrastructure.Test.Mocks;
 
 namespace CPX.Events.Infrastructure.Test
 {
-    public class EventStoryRepositoryTest
+    public sealed class EventStoryRepositoryTest
     {
         [Fact]
         public async Task Should_be_able_persist_events()
@@ -24,13 +24,30 @@ namespace CPX.Events.Infrastructure.Test
             fooAggregate.ChangeName(name, updatedAt);
             var domainEvents = fooAggregate.GetUncommitedEvents();
             await eventStoreRepository.SaveAsync(fooAggregate.Id, domainEvents, cancellationToken);
-            var aggregate = await eventStoreRepository.GetAsync(fooId, "Apply", cancellationToken);
+            var aggregate = await eventStoreRepository.GetAsync(fooId, cancellationToken);
             // Assert
-            Assert.Equal(fooId, aggregate.Id);
-            Assert.Equal(createdAt, aggregate.CreatedAt);
-            Assert.Equal(updatedAt, aggregate.UpdatedAt);
-            Assert.Equal(domainEvents.Count, aggregate.Version);
-            Assert.Equal(name, aggregate.Name);
+            Assert.NotNull(aggregate);
+            if (aggregate is not null)
+            {
+                Assert.Equal(fooId, aggregate.Id);
+                Assert.Equal(createdAt, aggregate.CreatedAt);
+                Assert.Equal(updatedAt, aggregate.UpdatedAt);
+                Assert.Equal(domainEvents.Count, aggregate.Version);
+                Assert.Equal(name, aggregate.Name);
+            }
+        }
+
+        [Fact]
+        public void Should_not_be_able_create_instance_with_event_store_context_null()
+        {
+            // Arrange
+            EventStoreContext? eventStoreContext = null;
+            // Act
+            // Assert
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new EventStoreRepository<FooAggregate, FooId>(eventStoreContext);
+            });
         }
     }
 }
