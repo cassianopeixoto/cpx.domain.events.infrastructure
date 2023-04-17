@@ -5,15 +5,15 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7DF07CB5-8690-4CB3-BEA3-246186E458D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPX.Events.Infrastructure.Repositories", "src\CPX.Events.Infrastructure.Repositories\CPX.Events.Infrastructure.Repositories.csproj", "{85166A84-6DBA-4FB6-B507-1DE5D99B637A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPX.Domain.Events.Infrastructure.Repositories", "src\CPX.Domain.Events.Infrastructure.Repositories\CPX.Domain.Events.Infrastructure.Repositories.csproj", "{85166A84-6DBA-4FB6-B507-1DE5D99B637A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPX.Events.Infrastructure.Repositories.Abstract", "src\CPX.Events.Infrastructure.Repositories.Abstract\CPX.Events.Infrastructure.Repositories.Abstract.csproj", "{F591471C-5510-43A7-B4D0-9DF2E7C5F317}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPX.Domain.Events.Infrastructure.Repositories.Abstract", "src\CPX.Domain.Events.Infrastructure.Repositories.Abstract\CPX.Domain.Events.Infrastructure.Repositories.Abstract.csproj", "{F591471C-5510-43A7-B4D0-9DF2E7C5F317}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPX.Events.Infrastructure.Repositories.Entities", "src\CPX.Events.Infrastructure.Repositories.Entities\CPX.Events.Infrastructure.Repositories.Entities.csproj", "{5C9007AD-6B4B-4381-9FC4-FBBA3CAD176D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPX.Domain.Events.Infrastructure.Repositories.Entities", "src\CPX.Domain.Events.Infrastructure.Repositories.Entities\CPX.Domain.Events.Infrastructure.Repositories.Entities.csproj", "{5C9007AD-6B4B-4381-9FC4-FBBA3CAD176D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{985C1855-2511-4A0C-9C4F-7EA50FE0F932}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPX.Events.Infrastructure.Test", "tests\CPX.Events.Infrastructure.Test\CPX.Events.Infrastructure.Test.csproj", "{D5566253-5944-446F-978A-48BE2D975975}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPX.Domain.Events.Infrastructure.Test", "tests\CPX.Domain.Events.Infrastructure.Test\CPX.Domain.Events.Infrastructure.Test.csproj", "{D5566253-5944-446F-978A-48BE2D975975}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,7 +1,7 @@
-﻿using CPX.Events.Infrastructure.Repositories;
-using CPX.Events.Infrastructure.Test.Mocks;
+﻿using CPX.Domain.Events.Infrastructure.Repositories;
+using CPX.Domain.Events.Infrastructure.Test.Mocks;
 
-namespace CPX.Events.Infrastructure.Test
+namespace CPX.Domain.Events.Infrastructure.Test
 {
     public sealed class EventStoryRepositoryTest
     {

@@ -3,13 +3,13 @@ using System.Reflection;
 using CPX.Domain.Abstract.Aggregates;
 using CPX.Domain.Abstract.Events;
 using CPX.Domain.Abstract.Identifiers;
-using CPX.Events.Infrastructure.Repositories.Abstract;
-using CPX.Events.Infrastructure.Repositories.Entities;
+using CPX.Domain.Events.Infrastructure.Repositories.Abstract;
+using CPX.Domain.Events.Infrastructure.Repositories.Entities;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace CPX.Events.Infrastructure.Repositories;
+namespace CPX.Domain.Events.Infrastructure.Repositories;
 
 public sealed class EventStoreRepository<TAggregate, TIdentity> : IEventStoreRepository<TAggregate, TIdentity> where TIdentity : Identifier where TAggregate : AggregateRoot<TIdentity>
 {

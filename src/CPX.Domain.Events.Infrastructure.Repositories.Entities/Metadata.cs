@@ -1,4 +1,4 @@
-﻿namespace CPX.Events.Infrastructure.Repositories.Entities;
+﻿namespace CPX.Domain.Events.Infrastructure.Repositories.Entities;
 
 public sealed class Metadata : Entity
 {

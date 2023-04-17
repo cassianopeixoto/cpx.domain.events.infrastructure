@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\CPX.Events.Infrastructure.Repositories.Entities\CPX.Events.Infrastructure.Repositories.Entities.csproj" />
-    <ProjectReference Include="..\CPX.Events.Infrastructure.Repositories.Abstract\CPX.Events.Infrastructure.Repositories.Abstract.csproj" />
+    <ProjectReference Include="..\CPX.Domain.Events.Infrastructure.Repositories.Entities\CPX.Domain.Events.Infrastructure.Repositories.Entities.csproj" />
+    <ProjectReference Include="..\CPX.Domain.Events.Infrastructure.Repositories.Abstract\CPX.Domain.Events.Infrastructure.Repositories.Abstract.csproj" />
     <ProjectReference Include="..\..\..\cpx.domain.abstract\src\CPX.Domain.Abstract\CPX.Domain.Abstract.csproj" />
   </ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿using CPX.Domain.Abstract.Aggregates;
 using CPX.Domain.Abstract.Events;
 
-namespace CPX.Events.Infrastructure.Test.Mocks;
+namespace CPX.Domain.Events.Infrastructure.Test.Mocks;
 
 public sealed class FooAggregate : AggregateRoot<FooId>, IApplyDomainEvent<FooCreatedEvent>, IApplyDomainEvent<FooNameChangedEvent>
 {

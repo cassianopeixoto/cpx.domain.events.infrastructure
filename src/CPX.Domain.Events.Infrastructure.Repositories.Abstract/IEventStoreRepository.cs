@@ -2,7 +2,7 @@
 using CPX.Domain.Abstract.Events;
 using CPX.Domain.Abstract.Identifiers;
 
-namespace CPX.Events.Infrastructure.Repositories.Abstract;
+namespace CPX.Domain.Events.Infrastructure.Repositories.Abstract;
 
 public interface IEventStoreRepository<TAggregate, TIdentity> where TAggregate : AggregateRoot<TIdentity> where TIdentity : Identifier
 {

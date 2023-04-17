@@ -1,8 +1,8 @@
-using CPX.Events.Infrastructure.Repositories.Entities;
+using CPX.Domain.Events.Infrastructure.Repositories.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CPX.Events.Infrastructure.Repositories.Configurations;
+namespace CPX.Domain.Events.Infrastructure.Repositories.Configurations;
 
 public sealed class MetadataTypeConfiguration : IEntityTypeConfiguration<Metadata>
 {
