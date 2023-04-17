@@ -5,14 +5,14 @@ namespace CPX.Domain.Events.Infrastructure.Test.Mocks;
 
 public sealed class FooAggregate : AggregateRoot<FooId>, IApplyDomainEvent<FooCreatedEvent>, IApplyDomainEvent<FooNameChangedEvent>
 {
-    public FooAggregate() : base() { }
+    public FooAggregate() { }
 
-    public FooAggregate(FooId fooId, DateTimeOffset createdAt) : base(fooId, createdAt)
+    public FooAggregate(FooId fooId, DateTimeOffset createdAt, Guid createdBy)
     {
-        Raise(new FooCreatedEvent(fooId, Version + 1, createdAt));
+        Raise(new FooCreatedEvent(fooId, Version + 1, createdAt, createdBy));
     }
 
-    public string Name { get; private set; }
+    public string? Name { get; private set; }
 
     public void Apply(FooCreatedEvent @event)
     {
@@ -27,8 +27,8 @@ public sealed class FooAggregate : AggregateRoot<FooId>, IApplyDomainEvent<FooCr
         base.Apply(@event);
     }
 
-    public void ChangeName(string name, DateTimeOffset updatedAt)
+    public void ChangeName(string name, DateTimeOffset updatedAt, Guid updatedBy)
     {
-        Raise(new FooNameChangedEvent(Id, Version + 1, updatedAt, name));
+        Raise(new FooNameChangedEvent(Id, Version + 1, updatedAt, updatedBy, name));
     }
 }

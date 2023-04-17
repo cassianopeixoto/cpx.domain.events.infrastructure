@@ -16,12 +16,14 @@ namespace CPX.Domain.Events.Infrastructure.Test
             var fooId = new FooId(Guid.NewGuid());
             var createdAt = DateTimeOffset.UtcNow;
             var updatedAt = DateTimeOffset.UtcNow.AddMinutes(1);
+            var createdBy = Guid.NewGuid();
+            var updatedBy = Guid.NewGuid();
             var name = "foo";
             var cancellationTokenSource = new CancellationTokenSource();
             var cancellationToken = cancellationTokenSource.Token;
             // Act
-            var fooAggregate = new FooAggregate(fooId, createdAt);
-            fooAggregate.ChangeName(name, updatedAt);
+            var fooAggregate = new FooAggregate(fooId, createdAt, createdBy);
+            fooAggregate.ChangeName(name, updatedAt, updatedBy);
             var domainEvents = fooAggregate.GetUncommitedEvents();
             await eventStoreRepository.SaveAsync(fooAggregate.Id, domainEvents, cancellationToken);
             var aggregate = await eventStoreRepository.GetAsync(fooId, cancellationToken);
@@ -32,6 +34,7 @@ namespace CPX.Domain.Events.Infrastructure.Test
                 Assert.Equal(fooId, aggregate.Id);
                 Assert.Equal(createdAt, aggregate.CreatedAt);
                 Assert.Equal(updatedAt, aggregate.UpdatedAt);
+                Assert.Equal(updatedBy, aggregate.UpdatedBy);
                 Assert.Equal(domainEvents.Count, aggregate.Version);
                 Assert.Equal(name, aggregate.Name);
             }
