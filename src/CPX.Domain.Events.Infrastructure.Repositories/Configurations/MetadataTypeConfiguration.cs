@@ -18,6 +18,6 @@ public sealed class MetadataTypeConfiguration : IEntityTypeConfiguration<Metadat
         builder.HasMany(o => o.EventsStores).WithOne(o => o.Metadata).HasForeignKey(o => o.MetadataUuid);
         builder.HasMany(o => o.Events).WithOne(o => o.Metadata).HasForeignKey(o => o.MetadataUuid);
 
-        builder.HasIndex(o => new { o.AssemblyName, o.NamespaceName, o.ClassName,  }).IsUnique();
+        builder.HasIndex(o => new { o.AssemblyName, o.NamespaceName, o.ClassName }).IsUnique();
     }
 }

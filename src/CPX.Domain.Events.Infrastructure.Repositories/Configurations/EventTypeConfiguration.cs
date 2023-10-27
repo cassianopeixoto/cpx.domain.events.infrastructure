@@ -19,6 +19,6 @@ public sealed class EventTypeConfiguration : IEntityTypeConfiguration<Event>
         builder.Property(o => o.Data).HasColumnName("data").IsRequired();
         builder.Property(o => o.Version).HasColumnName("version").IsRequired();
 
-        builder.HasIndex(o => new { o.MetadataUuid, o.EventStoreUuid, o.Version }).IsUnique();
+        builder.HasIndex(o => new { o.EventStoreUuid, o.Version }).IsUnique();
     }
 }

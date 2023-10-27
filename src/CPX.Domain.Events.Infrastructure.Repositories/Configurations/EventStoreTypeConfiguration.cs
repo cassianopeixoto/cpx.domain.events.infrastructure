@@ -15,7 +15,5 @@ public sealed class EventStoreTypeConfiguration : IEntityTypeConfiguration<Event
         builder.Property(o => o.MetadataUuid).HasColumnName("metadata_uuid").IsRequired();
         builder.HasOne(o => o.Metadata).WithMany(o => o.EventsStores).HasForeignKey(o => o.MetadataUuid);
         builder.HasMany(o => o.Events).WithOne(o => o.EventStore).HasForeignKey(o => o.EventStoreUuid);
-
-        builder.HasIndex(o => new { o.Uuid, o.MetadataUuid }).IsUnique();
     }
 }
